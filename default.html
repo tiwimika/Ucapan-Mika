@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Ucapan Spesial untuk Mika Christian</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 20px; }
+    .page { display: none; }
+    .active { display: block; }
+    button { 
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Halaman 1 -->
+  <div id="page1" class="page active">
+    <h1>Hallo Mika Christian!</h1>
+    <p>Apakah kamu siap membuka halaman ini?</p>
+    <button onclick="nextPage()">Siap!</button>
+  </div>
+
+  <!-- Halaman 2 -->
+  <div id="page2" class="page">
+    <h1>🎉 Besok tanggal 19 nih!</h1>
+    <p>Selamat hari lahir ya!</p>
+    <button onclick="nextPage()">Lanjut</button>
+  </div>
+
+  <!-- Halaman 3 -->
+  <div id="page3" class="page">
+    <h1>Ucapan dari Sang Kekasih</h1>
+    <p id="wishText">[make your wish here]</p>
+    <textarea id="wishInput"
+      placeholder="Tulis ucapanmu di sini..."
+      rows="4" cols="30"></textarea><br>
+    <button onclick="saveWish()">Simpan & lanjut</button>
+  </div>
+
+  <!-- Halaman 4 -->
+  <div id="page4" class="page">
+    <h1>💌 Ada permintaan apa nih?</h1>
+    <p>Mau minta apa aja boleh—biar hari ulang tahunmu makin berkesan 😊</p>
+    <input id="requestInput" type="text"
+      placeholder="Tulis permintaanmu..."
+      style="width: 80%; padding: 8px;"><br>
+    <button onclick="submitRequest()">Kirim</button>
+  </div>
+
+  <!-- Halaman Terima Kasih -->
+  <div id="page5" class="page">
+    <h1>Terima kasih, Mika!</h1>
+    <p id="finalText"></p>
+  </div>
+
+  <script>
+    let current = 1;
+    let wish = '';
+
+    function nextPage() {
+      document.getElementById(`page${current}`).classList.remove('active');
+      current++;
+      document.getElementById(`page${current}`).classList.add('active');
+    }
+
+    function saveWish() {
+      wish = document.getElementById('wishInput').value.trim();
+      if (wish === '') {
+        alert('Tolong tulis ucapan yang menyentuh ya 😊');
+        return;
+      }
+      document.getElementById('wishText').innerText = wish;
+      nextPage();
+    }
+
+    function submitRequest() {
+      const req = document.getElementById('requestInput').value.trim();
+      if (req === '') {
+        alert('Tolong isi permintaannya ya 😊');
+        return;
+      }
+      const final = `Ucapan kamu: "${wish}"\nPermintaan kamu: "${req}"\n\nSemoga harimu makin ceria!`;
+      document.getElementById('finalText').innerText = final;
+      document.getElementById(`page${current}`).classList.remove('active');
+      current++;
+      document.getElementById(`page${current}`).classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
